@@ -102,7 +102,7 @@ open class BarcodeScannerViewController: UIViewController {
     cameraViewController.delegate = self
     add(childViewController: cameraViewController)
 
-    view.bringSubview(toFront: messageView)
+    view.bringSubviewToFront(messageView)
   }
 
   open override func viewWillAppear(_ animated: Bool) {
@@ -202,7 +202,7 @@ open class BarcodeScannerViewController: UIViewController {
     flashView.alpha = 1
 
     view.addSubview(flashView)
-    view.bringSubview(toFront: flashView)
+    view.bringSubviewToFront(flashView)
 
     UIView.animate(
       withDuration: 0.2,
@@ -239,22 +239,24 @@ private extension BarcodeScannerViewController {
       )
     )
 
-    if navigationController != nil {
-      cameraView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-    } else {
-      headerViewController.delegate = self
-      add(childViewController: headerViewController)
+	cameraView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
 
-      let headerView = headerViewController.view!
-
-      NSLayoutConstraint.activate(
-        headerView.topAnchor.constraint(equalTo: view.topAnchor),
-        headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        headerView.bottomAnchor.constraint(equalTo: headerViewController.navigationBar.bottomAnchor),
-        cameraView.topAnchor.constraint(equalTo: headerView.bottomAnchor)
-      )
-    }
+//    if navigationController != nil {
+//      cameraView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//    } else {
+//      headerViewController.delegate = self
+//      add(childViewController: headerViewController)
+//
+//      let headerView = headerViewController.view!
+//
+//      NSLayoutConstraint.activate(
+//        headerView.topAnchor.constraint(equalTo: view.topAnchor),
+//        headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//        headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//        headerView.bottomAnchor.constraint(equalTo: headerViewController.navigationBar.bottomAnchor),
+//        cameraView.topAnchor.constraint(equalTo: headerView.bottomAnchor)
+//      )
+//    }
   }
 
   private func makeExpandedConstraints() -> [NSLayoutConstraint] {
@@ -303,7 +305,7 @@ extension BarcodeScannerViewController: CameraViewControllerDelegate {
 
   func cameraViewControllerDidTapSettingsButton(_ controller: CameraViewController) {
     DispatchQueue.main.async {
-      if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+      if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
         UIApplication.shared.openURL(settingsURL)
       }
     }
