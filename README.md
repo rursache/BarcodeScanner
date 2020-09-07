@@ -202,14 +202,16 @@ viewController.metadata.append(AVMetadataObject.ObjectType.qr)
 
 ## Installation
 
+Add a `Privacy - Camera Usage Description` in your Info.plist file, else the app will crash with a SIGBART. 
+
+You can use **Swift Package Manager** to install **BarcodeScanner** but you must import the icons (from Images folder) in your project.
+
 **BarcodeScanner** is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
 pod 'BarcodeScanner'
 ```
-
-Don't forget to set a `Privacy - Camera Usage Description` in your Info.plist file, else the app will crash with a SIGBART. 
 
 In order to quickly try the demo project of a **BarcodeScanner** just run
 `pod try BarcodeScanner` in your terminal.
@@ -224,9 +226,10 @@ github "hyperoslo/BarcodeScanner"
 To install **BarcodeScanner** manually just download and drop `Sources` and
 `Images` folders in your project.
 
-## Author
+## Authors
 
-Hyper Interaktiv AS, ios@hyper.no
+Codebase: Hyper Interaktiv AS, ios@hyper.no
+QoL fixes and SPM support: Radu Ursache
 
 ## Contributing
 
