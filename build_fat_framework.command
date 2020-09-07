@@ -1,3 +1,5 @@
+rm -rf "./build/BarcodeScanner.xcframework"
+
 xcodebuild archive \
 	-scheme BarcodeScanner-iOS \
 	-archivePath "./build/sim.xcarchive" \

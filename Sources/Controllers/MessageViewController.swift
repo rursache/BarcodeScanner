@@ -140,6 +140,7 @@ private extension MessageViewController {
     label.translatesAutoresizingMaskIntoConstraints = false
     label.textColor = .black
     label.numberOfLines = 3
+	label.minimumScaleFactor = 0.5
     label.font = UIFont.boldSystemFont(ofSize: 14)
     return label
   }
