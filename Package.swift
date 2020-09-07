@@ -8,9 +8,9 @@ let package = Package(
             .iOS(.v10)
         ],
         products: [
-            .library(name: "BarcodeScanner", targets: ["BarcodeScanner-iOS"])
+            .library(name: "BarcodeScanner", targets: ["BarcodeScanner"])
         ],
         targets: [
-            .target(name: "BarcodeScanner-iOS", path: "Sources")
+            .target(name: "BarcodeScanner", path: "Sources")
         ],
         swiftLanguageVersions: [.v5])
