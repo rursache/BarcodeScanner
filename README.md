@@ -226,6 +226,8 @@ github "hyperoslo/BarcodeScanner"
 To install **BarcodeScanner** manually just download and drop `Sources` and
 `Images` folders in your project.
 
+You can also create a fat binary using **build_fat_framework.command** and import the **.xcframework** in your project. Make sure to `cd` in project folder before running the **build_fat_framework.command**
+
 ## Authors
 
 Codebase: Hyper Interaktiv AS, ios@hyper.no
