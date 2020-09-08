@@ -104,8 +104,10 @@ public final class CameraViewController: UIViewController {
     view.addSubviews(settingsButton, flashButton, focusView, cameraButton, closeButton)
 	
 	closeButton.setTitle(nil, for: .normal)
+	closeButton.tintColor = .white
+	closeButton.backgroundColor = UIColor.black.withAlphaComponent(0.7)
 	if #available(iOS 13.0, *) {
-		closeButton.setImage(UIImage(systemName: "xmark.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40, weight: .medium, scale: .large)), for: .normal)
+		closeButton.setImage(UIImage(systemName: "xmark.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 42, weight: .medium, scale: .large)), for: .normal)
 	} else {
 		closeButton.setImage(UIImage(named: "closeButton"), for: .normal)
 	}
@@ -356,6 +358,9 @@ private extension CameraViewController {
     }
 
     let imageButtonSize: CGFloat = 37
+	
+	closeButton.layer.cornerRadius = imageButtonSize
+	closeButton.clipsToBounds = true
 
     NSLayoutConstraint.activate(
       flashButton.widthAnchor.constraint(equalToConstant: imageButtonSize),
