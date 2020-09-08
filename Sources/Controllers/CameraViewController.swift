@@ -359,7 +359,7 @@ private extension CameraViewController {
 
     let imageButtonSize: CGFloat = 37
 	
-	closeButton.layer.cornerRadius = imageButtonSize/2
+	closeButton.layer.cornerRadius = CGFloat(Int(imageButtonSize/2))
 	closeButton.clipsToBounds = true
 
     NSLayoutConstraint.activate(
