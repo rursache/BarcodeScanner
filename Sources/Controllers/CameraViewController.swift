@@ -103,18 +103,12 @@ public final class CameraViewController: UIViewController {
     view.layer.addSublayer(videoPreviewLayer)
     view.addSubviews(settingsButton, flashButton, focusView, cameraButton, closeButton)
 	
-	closeButton.setTitle(nil, for: .normal)
-	closeButton.tintColor = .white
-	closeButton.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-	if #available(iOS 13.0, *) {
-		closeButton.setImage(UIImage(systemName: "xmark.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 42, weight: .medium, scale: .large)), for: .normal)
-	} else {
-		closeButton.setImage(UIImage(named: "closeButton"), for: .normal)
-	}
+	
 
     torchMode = .off
     focusView.isHidden = true
     setupCamera()
+	setupCloseButton()
     setupConstraints()
     setupActions()
   }
@@ -222,6 +216,19 @@ public final class CameraViewController: UIViewController {
   }
 
   // MARK: - Camera setup
+
+	private func setupCloseButton() {
+		closeButton.setTitle(nil, for: .normal)
+		closeButton.tintColor = .white
+		closeButton.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+		if #available(iOS 13.0, *) {
+			closeButton.setImage(UIImage(systemName: "xmark.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 42, weight: .medium, scale: .large)), for: .normal)
+		} else {
+			closeButton.setImage(UIImage(named: "closeButton"), for: .normal)
+		}
+		closeButton.layer.cornerRadius = 20
+		closeButton.clipsToBounds = true
+	}
 
   /// Sets up camera and checks for camera permissions.
   private func setupCamera() {
@@ -358,9 +365,6 @@ private extension CameraViewController {
     }
 
     let imageButtonSize: CGFloat = 37
-	
-	closeButton.layer.cornerRadius = CGFloat(Int(imageButtonSize/2))
-	closeButton.clipsToBounds = true
 
     NSLayoutConstraint.activate(
       flashButton.widthAnchor.constraint(equalToConstant: imageButtonSize),
