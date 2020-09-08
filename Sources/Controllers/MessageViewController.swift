@@ -141,7 +141,7 @@ private extension MessageViewController {
     label.textColor = .black
     label.numberOfLines = 3
 	label.minimumScaleFactor = 0.5
-    label.font = UIFont.boldSystemFont(ofSize: 14)
+	label.font = UIFont.preferredFont(forTextStyle: .callout)
     return label
   }
 
@@ -195,7 +195,7 @@ extension MessageViewController {
       imageView.widthAnchor.constraint(equalToConstant: 30),
       imageView.heightAnchor.constraint(equalToConstant: 27),
 
-      textLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: -3),
+      textLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: -10),
       textLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10)
     ]
 
