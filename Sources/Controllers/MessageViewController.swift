@@ -107,7 +107,7 @@ public final class MessageViewController: UIViewController {
 
     switch status.state {
     case .scanning, .unauthorized:
-      textLabel.numberOfLines = 3
+      textLabel.numberOfLines = 2
       textLabel.textAlignment = .left
       imageView.tintColor = regularTintColor
     case .processing:
@@ -116,7 +116,6 @@ public final class MessageViewController: UIViewController {
       borderView.isHidden = false
       imageView.tintColor = regularTintColor
     case .notFound:
-      textLabel.font = UIFont.boldSystemFont(ofSize: 16)
       textLabel.numberOfLines = 10
       textLabel.textAlignment = .center
       imageView.tintColor = errorTintColor
@@ -139,7 +138,7 @@ private extension MessageViewController {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.textColor = .black
-    label.numberOfLines = 3
+    label.numberOfLines = 2
 	label.minimumScaleFactor = 0.5
 	label.font = UIFont.preferredFont(forTextStyle: .callout)
     return label
