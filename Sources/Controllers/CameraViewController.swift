@@ -11,6 +11,7 @@ protocol CameraViewControllerDelegate: class {
     _ controller: CameraViewController,
     didOutput metadataObjects: [AVMetadataObject]
   )
+  func cameraViewControllerWantToCloseParent()
 }
 
 /// View controller responsible for camera controls and video capturing.
@@ -37,6 +38,8 @@ public final class CameraViewController: UIViewController {
   public private(set) lazy var settingsButton: UIButton = self.makeSettingsButton()
   // Button to switch between front and back camera.
   public private(set) lazy var cameraButton: UIButton = self.makeCameraButton()
+
+  public private(set) lazy var closeButton: UIButton = .init(type: .custom)
 
   // Constraints for the focus view when it gets smaller in size.
   private var regularFocusViewConstraints = [NSLayoutConstraint]()
@@ -99,6 +102,13 @@ public final class CameraViewController: UIViewController {
 
     view.layer.addSublayer(videoPreviewLayer)
     view.addSubviews(settingsButton, flashButton, focusView, cameraButton)
+	
+	closeButton.setTitle(nil, for: .normal)
+	if #available(iOS 13.0, *) {
+		closeButton.setImage(UIImage(systemName: "xmark.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40, weight: .medium, scale: .large)), for: .normal)
+	} else {
+		closeButton.setTitle("Close", for: .normal)
+	}
 
     torchMode = .off
     focusView.isHidden = true
@@ -170,6 +180,12 @@ public final class CameraViewController: UIViewController {
       for: .touchUpInside
     )
 
+	closeButton.addTarget(
+      self,
+      action: #selector(handleCloseButtonTap),
+      for: .touchUpInside
+    )
+
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(appWillEnterForeground),
@@ -192,6 +208,10 @@ public final class CameraViewController: UIViewController {
   /// Swaps camera position.
   @objc private func handleCameraButtonTap() {
     swapCamera()
+  }
+
+  @objc private func handleCloseButtonTap() {
+	delegate?.cameraViewControllerWantToCloseParent()
   }
 
   /// Sets the next torch mode.
@@ -317,6 +337,14 @@ private extension CameraViewController {
         cameraButton.bottomAnchor.constraint(
           equalTo: view.safeAreaLayoutGuide.bottomAnchor,
           constant: -30
+        ),
+		closeButton.topAnchor.constraint(
+          equalTo: view.safeAreaLayoutGuide.topAnchor,
+          constant: 16
+        ),
+		closeButton.leadingAnchor.constraint(
+          equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+          constant: 16
         )
       )
     } else {
@@ -332,6 +360,9 @@ private extension CameraViewController {
     NSLayoutConstraint.activate(
       flashButton.widthAnchor.constraint(equalToConstant: imageButtonSize),
       flashButton.heightAnchor.constraint(equalToConstant: imageButtonSize),
+	  
+	  closeButton.widthAnchor.constraint(equalToConstant: imageButtonSize),
+      closeButton.heightAnchor.constraint(equalToConstant: imageButtonSize),
 
       settingsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       settingsButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
