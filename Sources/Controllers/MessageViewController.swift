@@ -139,7 +139,9 @@ private extension MessageViewController {
     label.translatesAutoresizingMaskIntoConstraints = false
     label.textColor = .black
     label.numberOfLines = 2
+	label.adjustsFontSizeToFitWidth = true
 	label.minimumScaleFactor = 0.5
+	label.lineBreakMode = .byClipping
 	label.font = UIFont.preferredFont(forTextStyle: .callout)
     return label
   }
