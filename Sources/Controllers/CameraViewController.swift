@@ -69,7 +69,12 @@ public final class CameraViewController: UIViewController {
         captureDevice.unlockForConfiguration()
       } catch {}
 
-      flashButton.setImage(torchMode.image, for: UIControl.State())
+		if #available(iOS 13.0, *) {
+			flashButton.tintColor = torchMode == .off ? .white : .systemYellow
+		} else {
+			flashButton.setImage(torchMode.image, for: UIControl.State())
+		}
+      
     }
   }
 
@@ -107,6 +112,7 @@ public final class CameraViewController: UIViewController {
     focusView.isHidden = true
     setupCamera()
 	setupCloseButton()
+	setupFlashButton()
     setupConstraints()
     setupActions()
   }
@@ -212,7 +218,7 @@ public final class CameraViewController: UIViewController {
   @objc private func handleFlashButtonTap() {
     torchMode = torchMode.next
   }
-
+	
   // MARK: - Camera setup
 
 	private func setupCloseButton() {
@@ -227,6 +233,15 @@ public final class CameraViewController: UIViewController {
 		}
 		closeButton.layer.cornerRadius = 18.5
 		closeButton.clipsToBounds = true
+	}
+	
+	private func setupFlashButton() {
+		if #available(iOS 13.0, *) {
+			flashButton.setImage(UIImage(systemName: "bolt.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight: .medium, scale: .large)), for: .normal)
+			flashButton.imageEdgeInsets = UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3)
+		} else {
+			flashButton.setImage(self.torchMode.image, for: .normal)
+		}
 	}
 
   /// Sets up camera and checks for camera permissions.
