@@ -221,6 +221,7 @@ public final class CameraViewController: UIViewController {
 		closeButton.backgroundColor = UIColor.black.withAlphaComponent(0.7)
 		if #available(iOS 13.0, *) {
 			closeButton.setImage(UIImage(systemName: "xmark.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight: .medium, scale: .large)), for: .normal)
+			closeButton.imageEdgeInsets = UIEdgeInsets(top: -4, left: -4, bottom: -4, right: -4)
 		} else {
 			closeButton.setImage(UIImage(named: "closeButton"), for: .normal)
 		}
