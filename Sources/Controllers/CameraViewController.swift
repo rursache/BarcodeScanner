@@ -101,13 +101,13 @@ public final class CameraViewController: UIViewController {
     }
 
     view.layer.addSublayer(videoPreviewLayer)
-    view.addSubviews(settingsButton, flashButton, focusView, cameraButton)
+    view.addSubviews(settingsButton, flashButton, focusView, cameraButton, closeButton)
 	
 	closeButton.setTitle(nil, for: .normal)
 	if #available(iOS 13.0, *) {
 		closeButton.setImage(UIImage(systemName: "xmark.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40, weight: .medium, scale: .large)), for: .normal)
 	} else {
-		closeButton.setTitle("Close", for: .normal)
+		closeButton.setImage(UIImage(named: "closeButton"), for: .normal)
 	}
 
     torchMode = .off
