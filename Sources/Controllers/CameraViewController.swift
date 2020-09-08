@@ -220,7 +220,7 @@ public final class CameraViewController: UIViewController {
 		closeButton.tintColor = .white
 		closeButton.backgroundColor = UIColor.black.withAlphaComponent(0.7)
 		if #available(iOS 13.0, *) {
-			closeButton.setImage(UIImage(systemName: "xmark.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 46, weight: .medium, scale: .large)), for: .normal)
+			closeButton.setImage(UIImage(systemName: "xmark.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight: .medium, scale: .large)), for: .normal)
 		} else {
 			closeButton.setImage(UIImage(named: "closeButton"), for: .normal)
 		}
