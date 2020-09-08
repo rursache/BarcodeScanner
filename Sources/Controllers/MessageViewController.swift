@@ -52,6 +52,10 @@ public final class MessageViewController: UIViewController {
     animate(blurStyle: .light)
     animate(borderViewAngle: CGFloat(Double.pi/2))
   }
+	
+  func resetBlur() {
+	self.blurView.effect = UIBlurEffect(style: .extraLight)
+  }
 
   /**
    Animates blur to make pulsating effect.

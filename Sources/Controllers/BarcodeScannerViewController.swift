@@ -176,7 +176,9 @@ open class BarcodeScannerViewController: UIViewController {
         self?.messageView.layer.removeAllAnimations()
         if self?.status.state == .processing {
           self?.messageViewController.animateLoading()
-        }
+		} else if self?.status.state == .scanning {
+			self?.messageViewController.resetBlur()
+		}
       }))
   }
 
